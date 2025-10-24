@@ -118,15 +118,6 @@ footer {
     text-align: center;
 }
 
-/* Button Styles */
-.schedule-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-
 .button {
     display: inline-block;        
     margin: 10px 0;               
@@ -136,14 +127,14 @@ footer {
     font-size: 18px;
     border-radius: 40px; 
     cursor: pointer;
-    color: white;
+    color: #e66d2d;
     font-weight: bold;
     text-decoration: none;       
     transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 
 .button:hover {
-    background-color: #e66d2d;
+    background-color: #e6b22d;
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
