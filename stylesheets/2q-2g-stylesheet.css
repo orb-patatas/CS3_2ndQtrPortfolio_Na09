@@ -147,3 +147,30 @@ footer {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
+
+.w3-container {
+    text-align: center;
+    padding: 50px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.w3-container h1 {
+    color: #e2b857;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.w3-container nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.w3-container .button {
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+}
