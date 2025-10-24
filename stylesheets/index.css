@@ -1,6 +1,6 @@
 body {
     font-family: 'Baloo 2', sans-serif;
-    background: linear-gradient(135deg, #fdfdfd, #f5e7b2);
+    background: linear-gradient(135deg, #d79552, #eb933a);
     color: #333;
     text-align: left;
     margin: 0;
@@ -36,7 +36,6 @@ nav {
     display: flex;
     gap: 20px;
 }
-
 nav a {
     color: white;
     text-decoration: none;
@@ -51,12 +50,17 @@ nav a:link {
 }
 
 nav a:visited {
-    color: #f5e7b2;
+    color: #e9d179;
 }
 
 nav a:hover {
     background-color: rgba(255,255,255,0.2);
     transform: translateY(-2px);
+}
+
+.image-content p {
+    text-align: justify; 
+    line-height: 1.6; 
 }
 
 table {
@@ -118,15 +122,6 @@ footer {
     text-align: center;
 }
 
-/* Button Styles */
-.schedule-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-
 .button {
     display: inline-block;        
     margin: 10px 0;               
@@ -136,7 +131,7 @@ footer {
     font-size: 18px;
     border-radius: 40px; 
     cursor: pointer;
-    color: white;
+    color: rgb(54, 44, 44);
     font-weight: bold;
     text-decoration: none;       
     transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
@@ -148,3 +143,20 @@ footer {
     box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
+.button:visited {
+    color: #8B4513;
+}
+
+.w3-container h1 {
+    color: #e2b857;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.w3-container nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
