@@ -1,0 +1,294 @@
+body {
+    background-color: #2a1b0d; 
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(120, 60, 20, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(120, 60, 20, 0.1) 0%, transparent 20%),
+        linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+    color: #e8e0d0; 
+    font-family: 'Courier New', 'Monaco', monospace;
+    line-height: 1.5;
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Confidential Stamp Effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 8rem;
+    color: rgba(178, 34, 34, 0.03);
+    pointer-events: none;
+    z-index: -1;
+    white-space: nowrap;
+}
+
+/* Case Header */
+.detective-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #8b4513;
+    border-radius: 8px;
+    position: relative;
+}
+
+.main-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 3rem;
+    color: #e8e0d0;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.subtitle {
+    color: #d2b48c; 
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Evidence Board Grid */
+.evidence-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3rem;
+    margin: 3rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Polaroid Evidence Photo */
+.evidence-photo {
+    background: white;
+    padding: 15px 15px 40px 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    transform: rotate(var(--rotation, -2deg));
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+/* Random rotations */
+.evidence-photo:nth-child(odd) {
+    --rotation: 1deg;
+}
+.evidence-photo:nth-child(even) {
+    --rotation: -1deg;
+}
+.evidence-photo:nth-child(3n) {
+    --rotation: 2deg;
+}
+
+.evidence-photo:hover {
+    transform: rotate(0deg) translateY(-10px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+    z-index: 10;
+}
+
+/* Photo Content Area */
+.photo-content {
+    background: #f0f0f0;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.photo {
+    color: #666;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.5); /* Zooms out to 80% size */
+    display: block;
+}
+
+
+/* Case Name on Polaroid */
+.case-name {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Evidence Details (hover) */
+.evidence-details {
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    width: 90%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.evidence-photo:hover .evidence-details {
+    opacity: 1;
+}
+
+.clues::before {
+    content: "🔍 Clues: ";
+    font-weight: bold;
+    color: #ff4444;
+}
+
+.coworkers::before {
+    content: "🕵️ Coworkers: ";
+    font-weight: bold;
+    color: #ff4444;
+}
+
+/* Red String Connections Container */
+.red-strings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Individual Red String */
+.red-string {
+    stroke: #ff4444;
+    stroke-width: 2;
+    stroke-dasharray: 5, 5;
+    filter: drop-shadow(0 0 2px rgba(255, 0, 0, 0.5));
+    transition: all 0.3s ease;
+}
+
+.evidence-photo:hover ~ .red-strings .red-string {
+    stroke: #ff0000;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.8));
+}
+
+/* Action Buttons */
+.investigation-links {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.investigate-link {
+    background: #8b0000; /* Dark red */
+    color: white !important;
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    border: 1px solid #ff4444;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.investigate-link:hover {
+    background: #ff4444;
+    color: #000 !important;
+}
+
+/* Detective Footer */
+.detective-footer {
+    text-align: center;
+    margin-top: 5rem;
+    padding: 2rem;
+    border-top: 1px solid #8b4513;
+    color: #d2b48c;
+    font-style: italic;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Pin Markers */
+.evidence-photo::after {
+    content: "📍";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .evidence-board {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .evidence-photo {
+        transform: rotate(0deg) !important;
+    }
+    
+    .investigation-links {
+        flex-direction: column;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1005;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8b4513;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a0522d;
+}
+
+/* Animation for red strings */
+@keyframes pulseString {
+    0%, 100% { stroke-width: 2; }
+    50% { stroke-width: 3; }
+}
+
+.red-string:hover {
+    animation: pulseString 0.5s ease-in-out;
+}
