@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript Events | Task 3 </title>
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Baloo 2', sans-serif;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                text-align: center;
+                transition: background-color 0.3s ease;
+            }
+            
+            .center-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="center-content">
+            <h2>Press any key</h2>
+            <p>Refresh page to reset</p>
+        </div>
+        
+        <script>
+            window.onkeydown = function(event) {
+            console.log("Key:", event.key);
+            document.body.style.backgroundColor = "royalblue";
+    }
+</script>
+    </body>
+</html>
