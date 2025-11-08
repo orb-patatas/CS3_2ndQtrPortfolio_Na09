@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <Title>JavaScript Events | Task 5 </Title>
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
+        <!--🎮 Build a mini game:
+            Show a random letter on screen
+            When the user presses the correct key, show “✅ Correct!”
+            If wrong, show “❌ Try again!”
+            💬 Stretch Goal: Add a timer or score counter.-->
+        <style>
+            body {
+                font-family: 'Baloo 2', sans-serif;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: #f0f8ff;
+                transition: background-color 0.3s ease;
+            }
+            
+            .game-container {
+                text-align: center;
+                background: white;
+                padding: 40px;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                min-width: 300px;
+            }
+            
+            .target-letter {
+                font-size: 120px;
+                font-weight: bold;
+                color: #4169e1;
+                margin: 20px 0;
+                text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            }
+            
+            .feedback {
+                font-size: 24px;
+                font-weight: 600;
+                margin: 20px 0;
+                min-height: 40px;
+            }
+            
+            .score-timer {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 30px;
+                font-size: 18px;
+                color: #666;
+            }
+            
+            .correct {
+                color: #28a745;
+            }
+            
+            .incorrect {
+                color: #dc3545;
+            }
+            
+            .instructions {
+                color: #666;
+                margin-bottom: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="game-container">
+            <h1>🎮 Keyboard Game</h1>
+            <p class="instructions">Press the matching letter on your keyboard!</p>
+            
+            <div class="target-letter" id="targetLetter">A</div>
+            
+            <div class="feedback" id="feedback">Press any letter to start...</div>
+            
+            <div class="score-timer">
+                <div>Score: <span id="score">0</span></div>
+                <div>Time: <span id="timer">30</span>s</div>
+            </div>
+        </div>
+
+        <script>
+            // Game elements
+            const targetLetter = document.getElementById('targetLetter');
+            const feedback = document.getElementById('feedback');
+            const scoreDisplay = document.getElementById('score');
+            const timerDisplay = document.getElementById('timer');
+            
+            // Game variables
+            let score = 0;
+            let timeLeft = 30;
+            let timer;
+            let currentLetter;
+            
+            // Available letters (A-Z)
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            
+            // Start the game
+            function startGame() {
+                score = 0;
+                timeLeft = 30;
+                scoreDisplay.textContent = score;
+                timerDisplay.textContent = timeLeft;
+                feedback.textContent = 'Press the matching letter!';
+                feedback.className = 'feedback';
+                
+                generateNewLetter();
+                startTimer();
+            }
+            
+            // Generate a new random letter
+            function generateNewLetter() {
+                const randomIndex = Math.floor(Math.random() * letters.length);
+                currentLetter = letters[randomIndex];
+                targetLetter.textContent = currentLetter;
+            }
+            
+            // Start the countdown timer
+            function startTimer() {
+                clearInterval(timer);
+                timer = setInterval(() => {
+                    timeLeft--;
+                    timerDisplay.textContent = timeLeft;
+                    
+                    if (timeLeft <= 0) {
+                        endGame();
+                    }
+                }, 1000);
+            }
+            
+            // Handle keyboard input
+            document.addEventListener('keydown', function(event) {
+                const pressedKey = event.key.toUpperCase();
+                
+                // Only process letter keys
+                if (letters.includes(pressedKey)) {
+                    if (pressedKey === currentLetter) {
+                        // Correct!
+                        score++;
+                        scoreDisplay.textContent = score;
+                        feedback.textContent = '✅ Correct!';
+                        feedback.className = 'feedback correct';
+                        document.body.style.backgroundColor = '#d4edda';
+                        
+                        // Generate new letter after a brief delay
+                        setTimeout(generateNewLetter, 300);
+                    } else {
+                        // Wrong!
+                        feedback.textContent = '❌ Try again!';
+                        feedback.className = 'feedback incorrect';
+                        document.body.style.backgroundColor = '#f8d7da';
+                    }
+                }
+            });
+            
+            // End the game
+            function endGame() {
+                clearInterval(timer);
+                feedback.innerHTML = `🎯 Game Over!<br>Final Score: ${score}`;
+                feedback.className = 'feedback';
+                targetLetter.textContent = '🏁';
+                
+                setTimeout(startGame, 5000);
+            }
+            
+            startGame();
+        </script>
+    </body>
+</html>

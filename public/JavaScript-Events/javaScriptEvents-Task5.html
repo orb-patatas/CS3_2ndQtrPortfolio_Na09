@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <Title>JavaScript Events | Task 5 </Title>
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="icon" href="../../assets/sirDuli-Tsukki.png">
+        <style>
+            body {
+                font-family: 'Baloo 2', sans-serif;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: coral;
+                transition: background-color 0.3s ease;
+            }
+            
+            .game-container {
+                text-align: center;
+                background: rgb(244, 181, 136);
+                padding: 40px;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                min-width: 300px;
+            }
+            
+            .target-letter {
+                font-size: 120px;
+                font-weight: bold;
+                color: #f0370de9;
+                margin: 20px 0;
+                text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            }
+            
+            .feedback {
+                font-size: 24px;
+                font-weight: 600;
+                margin: 20px 0;
+                min-height: 40px;
+            }
+            
+            .score {
+                font-size: 18px;
+                color: #666;
+                margin-top: 30px;
+            }
+            
+            .correct {
+                color: #28a745;
+            }
+            
+            .incorrect {
+                color: #dc3545;
+            }
+            
+            .instructions {
+                color: #666;
+                margin-bottom: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="game-container">
+            <h1>Keyboard Game ! </h1>
+            <h2>by Ruisse Oebree Candelaria | 9 - Sodium | 8 Nov 2025</h2>
+            <p class="instructions">Press the matching letter on your keyboard!</p>
+            <div class="target-letter" id="targetLetter">A</div>
+            <div class="feedback" id="feedback">Press any letter to start...</div>
+            <div class="score">Score: <span id="score">0</span></div>
+        </div>
+
+        <script>
+            // Game elements
+            const targetLetter = document.getElementById('targetLetter');
+            const feedback = document.getElementById('feedback');
+            const scoreDisplay = document.getElementById('score');
+            
+            // Game variables
+            let score = 0;
+            let currentLetter;
+            
+            // Available letters (A-Z)
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            
+            // Start !!!!
+            function startGame() {
+                score = 0;
+                scoreDisplay.textContent = score;
+                feedback.textContent = 'Press the matching letter!';
+                feedback.className = 'feedback';
+                
+                generateNewLetter();
+            }
+            
+            // New random letter
+            function generateNewLetter() {
+                const randomIndex = Math.floor(Math.random() * letters.length);
+                currentLetter = letters[randomIndex];
+                targetLetter.textContent = currentLetter;
+            }
+            
+            // Keyboard input
+            document.addEventListener('keydown', function(event) {
+                const pressedKey = event.key.toUpperCase();
+                
+                if (letters.includes(pressedKey)) {
+                    if (pressedKey === currentLetter) {
+                        score++;
+                        scoreDisplay.textContent = score;
+                        feedback.textContent = '✅ Correct!';
+                        feedback.className = 'feedback correct';
+                        document.body.style.backgroundColor = '#d4edda';
+                        
+                        // Generate new letter after a brief delay
+                        setTimeout(generateNewLetter, 300);
+                    } else {
+                        feedback.textContent = '❌ Try again!';
+                        feedback.className = 'feedback incorrect';
+                        document.body.style.backgroundColor = '#f8d7da';
+                    }
+                }
+            });
+            
+            startGame();
+        </script>
+
+        <footer id="footer">
+            <p>© 2025 Ruisse Candelaria. All rights reserved.</p>
+        </footer>
+    </body>
+</html>
